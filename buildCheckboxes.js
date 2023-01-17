@@ -17,16 +17,19 @@ export default function buildCheckboxes(checkBoxArea, bookList, bookKeys, copyBu
     for (let x = 0; x < allBookCheckboxes.length; x++) {
       allBookCheckboxes[x].checked = false;
     }
+    copyButtonArea.innerHTML = "";
   });
   selectAllButton.addEventListener("click", () => {
     for (let x = 0; x < allBookCheckboxes.length; x++) {
       allBookCheckboxes[x].checked = true;
     }
+    copyButtonArea.innerHTML = "";
   });
   selectInvertButton.addEventListener("click", () => {
     for (let x = 0; x < allBookCheckboxes.length; x++) {
       allBookCheckboxes[x].checked = !allBookCheckboxes[x].checked;
     }
+    copyButtonArea.innerHTML = "";
   });
 
   // remove copy button when any checkbox is clicked
