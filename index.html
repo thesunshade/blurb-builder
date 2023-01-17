@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon.png">
+    <title>Blurb Builder</title>
+</head>
+
+<body>
+    <div id="controls">
+        <div id="checkboxes-area" class="checkboxes-area">
+            <h1>Blurb Builder</h1>
+            <details>
+                <summary>
+                    Info
+                </summary>
+                <p>This tool allows you to build a custom JSON object with the sutta blurbs from SuttaCentral.net</p>
+                <p>You can find the source files on <a
+                        href="https://github.com/suttacentral/bilara-data/tree/published/root/en/blurb"
+                        title="open on Github.com" rel="noreferrer" target="_blank">GitHub</a></p>
+            </details>
+        </div>
+        <hr style="width:6rem">
+        <label for="chapter-blurbs"><input type="checkbox" id="chapter-blurbs" value="chapter-blurbs"
+                name="chapter-blurbs">
+            Include Chapter Blurbs</label>
+        <div class="action-button-area">
+            <button id="build-button" class="build-button">Build</button>
+            <div id="copy-button-area" class="copy-button-area"></div>
+        </div>
+    </div>
+    <div id="table-area" class="table-area"></div>
+    <script type="module" src="index.js"></script>
+</body>
+
+</html>
