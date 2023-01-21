@@ -50,6 +50,11 @@ a {
     font-weight: bold;
 }
 
+.options {
+    display: flex;
+    flex-direction: column;
+}
+
 .action-button-area {
     display: flex;
     flex-direction: row;

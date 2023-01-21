@@ -5,9 +5,9 @@ const checkBoxArea = document.getElementById("checkboxes-area");
 const buildButton = document.getElementById("build-button");
 const copyButtonArea = document.getElementById("copy-button-area");
 const includeChapterBlurbsCheckbox = document.getElementById("chapter-blurbs");
+const stripHtmlCheckbox = document.getElementById("strip-html");
 const branch = "published/"; // should end with slash
 const blurbs = {};
-const garbage = {};
 const bookList = {
   dn: "Dīgha Nikaya",
   mn: "Majjhima Nikāya",
@@ -55,19 +55,23 @@ function fetchBlurbs(selectedBooks) {
 
   Promise.all(bookBlurbResponses).then(responses => {
     Object.keys(blurbs).forEach(key => delete blurbs[key]);
-    Object.keys(garbage).forEach(key => delete garbage[key]);
+
+    function stripHtml(blurb) {
+      if (stripHtmlCheckbox.checked) {
+        return blurb.replace(/<.+?>/g, "");
+      } else return blurb;
+    }
+
     for (let x = 0; x < selectedBooks.length; x++) {
       const blurbsObject = responses[x];
       const blurbKeys = Object.keys(blurbsObject);
       for (let a = 0; a < blurbKeys.length; a++) {
         const finalKey = blurbKeys[a].replace(/.+?:/, "");
         if (includeChapterBlurbsCheckbox.checked) {
-          blurbs[finalKey] = blurbsObject[blurbKeys[a]];
+          blurbs[finalKey] = stripHtml(blurbsObject[blurbKeys[a]]);
         } else {
           if (!/-[a-zA-Z]/.test(finalKey)) {
-            blurbs[finalKey] = blurbsObject[blurbKeys[a]];
-          } else {
-            garbage[finalKey] = blurbsObject[blurbKeys[a]];
+            blurbs[finalKey] = stripHtml(blurbsObject[blurbKeys[a]]);
           }
         }
       }
