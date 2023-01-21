@@ -6,11 +6,16 @@
 }
 
 body {
-    display: flex;
-    flex-direction: row;
+
     background-color: var(--off-black);
     color: var(--off-white);
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    max-height: 100vh
+}
+
+.main-area {
+    display: flex;
+    flex-direction: row;
 }
 
 h1 {
@@ -64,7 +69,7 @@ a {
 
 .table-area {
     overflow-y: scroll;
-    height: 90vh
+    height: 85vh
 }
 
 .table-area thead {
@@ -107,4 +112,23 @@ a {
 
         flex-direction: column;
     }
+}
+
+.links-area a {
+    position: relative;
+    top: 0;
+    transition: all ease 0.5s;
+    filter: grayscale(50%);
+}
+
+.links-area a:hover {
+    top: -3px;
+}
+
+.links-area {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 1rem;
 }
