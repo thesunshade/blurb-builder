@@ -132,3 +132,28 @@ a {
     justify-content: center;
     margin-top: 1rem;
 }
+
+/* Custom Checkboxes */
+input[type="checkbox"] {
+    display: none;
+}
+
+.check-icon {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    background-image: url("./images/checkbox--unchecked.svg");
+    background-repeat: no-repeat;
+    background-size: 15px;
+}
+
+input[type="checkbox"]:checked+.check-icon {
+    background-image: url("./images/checkbox--checked.svg");
+}
+
+img.checkbox {
+    height: 20px;
+    margin-right: 0.5rem;
+}
+
+/* END Custom Checkboxes */

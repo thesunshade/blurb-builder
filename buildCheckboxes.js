@@ -3,6 +3,7 @@ export default function buildCheckboxes(checkBoxArea, bookList, bookKeys, copyBu
     checkBoxArea.innerHTML += `<label for="${bookKeys[x]}"><input type="checkbox" id="${bookKeys[x]}" value="${
       bookKeys[x]
     }" name="books" class="book-checkboxes">
+    <span class="check-icon"></span>
       ${bookList[bookKeys[x]]}</label>`;
   }
   checkBoxArea.innerHTML += `<div class="selection-buttons">

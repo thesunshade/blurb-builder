@@ -20,6 +20,9 @@ const bookList = {
   vv: "Vimāna Vatthu",
   pv: "Peta Vatthu",
   ja: "Jātaka",
+  "pli-tv-bu-vb": "Bhikkhu Vibhanga",
+  "pli-tv-bi-vb": "Bhikkhuni Vibhanga",
+  "pli-tv-kd": "Khandhaka",
 };
 
 const bookKeys = Object.keys(bookList);
@@ -45,7 +48,6 @@ function fetchBlurbs(selectedBooks) {
     const githubLocation = `https://raw.githubusercontent.com/suttacentral/bilara-data/${branch}root/en/blurb/${selectedBooks[x]}-blurbs_root-en.json`;
     bookBlurbResponses[x] = fetch(githubLocation)
       .then(response => response.json())
-      // .then(data => console.log(data))
       .catch(error => {
         console.log("something went wrong getting---root---");
         console.log(error);
@@ -54,7 +56,7 @@ function fetchBlurbs(selectedBooks) {
   }
 
   Promise.all(bookBlurbResponses).then(responses => {
-    Object.keys(blurbs).forEach(key => delete blurbs[key]);
+    Object.keys(blurbs).forEach(key => delete blurbs[key]); // clear object
 
     function stripHtml(blurb) {
       if (stripHtmlCheckbox.checked) {
@@ -62,16 +64,24 @@ function fetchBlurbs(selectedBooks) {
       } else return blurb;
     }
 
+    function cleanUpKeys(originalKey) {
+      return originalKey
+        .replace(/.+?:/, "")
+        .replace(/pli-tv-bi-vb-/, "bi")
+        .replace(/pli-tv-bu-vb-/, "bu")
+        .replace(/pli-tv-/, "");
+    }
+
     for (let x = 0; x < selectedBooks.length; x++) {
       const blurbsObject = responses[x];
       const blurbKeys = Object.keys(blurbsObject);
       for (let a = 0; a < blurbKeys.length; a++) {
-        const finalKey = blurbKeys[a].replace(/.+?:/, "");
+        const cleanedKey = cleanUpKeys(blurbKeys[a]);
         if (includeChapterBlurbsCheckbox.checked) {
-          blurbs[finalKey] = stripHtml(blurbsObject[blurbKeys[a]]);
+          blurbs[cleanedKey] = stripHtml(blurbsObject[blurbKeys[a]]);
         } else {
-          if (!/-[a-zA-Z]/.test(finalKey)) {
-            blurbs[finalKey] = stripHtml(blurbsObject[blurbKeys[a]]);
+          if (!/-[a-zA-Z]/.test(cleanedKey)) {
+            blurbs[cleanedKey] = stripHtml(blurbsObject[blurbKeys[a]]);
           }
         }
       }
